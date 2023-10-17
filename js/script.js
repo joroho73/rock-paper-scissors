@@ -3,11 +3,11 @@ let playerScore = 0;
 let computerScore = 0;
 
 //choose rock, paper or scissors randomly for the computer
+//using getRandomNumber()
 function getComputerChoice(){
     const choiceArray = ['rock','paper','scissors'];
     let choice = getRandomNumber();
     return choiceArray[choice];
-
 }
 
 function getRandomNumber(){
@@ -15,65 +15,46 @@ function getRandomNumber(){
 }
 
 function playRound(playerSelection, computerSelection){
-    // declare variables for player  selection
+    //get player choice
     let playerSel = playerSelection.toLowerCase();
     // enable shorthand of r,p or c.
     if (playerSel[0] === "r"){
         playerSel = "rock";
     }else if(playerSel[0] === "p"){
         playerSel = "paper";
-    }
-    else if (playerSel[0] === "s"){
+    }else if (playerSel[0] === "s"){
         playerSel = "scissors";
     }
-    // declare variable for computer selection
+
+    // get computer choice
     let computerSel = computerSelection.toLowerCase();
     console.log(`p: ${playerSel}, c: ${computerSel} `);
 
-    // create if statement for each option:
-    //rock - rock
-    if(playerSel === 'rock' && computerSel === 'rock'){
+    // create if statement for each result (draw, win, loose):
+
+    //draw
+    if(    (playerSel === 'rock' && computerSel === 'rock') 
+        || (playerSel === 'paper' && computerSel === 'paper') 
+        || (playerSel === 'scissors' && computerSel === 'scissors')){
         return `Draw! p: ${playerSel} | c: ${computerSel}`;
     }
-    //rock - paper
-    else if(playerSel === 'rock' && computerSel === 'paper'){
-        computerScore++;
-        return `You loose! ${computerSel} beats ${playerSel}`;
-    }
-    //rock - scissors
-    else if(playerSel === 'rock' && computerSel === 'scissors'){
+    //win
+    else if(
+           (playerSel === 'rock' && computerSel === 'scissors')
+        || (playerSel === 'paper' && computerSel === 'rock')
+        || (playerSel === 'scissors' && computerSel === 'paper')){
         playerScore++;
         return `You win! ${playerSel} beats ${computerSel}`;
     }
-    //paper - rock
-    else if(playerSel === 'paper' && computerSel === 'rock'){
-        playerScore++;
-        return `You win! ${playerSel} beats ${computerSel}`;
-    }
-    //paper - paper
-    else if(playerSel === 'paper' && computerSel === 'paper'){
-        return `Draw! p: ${playerSel} | c: ${computerSel}`;
-    }
-    //paper - scissors
-    else if(playerSel === 'paper' && computerSel === 'scissors'){
+    //loose
+    else if(
+            (playerSel === 'rock' && computerSel === 'paper')
+            || (playerSel === 'paper' && computerSel === 'scissors')
+            || (playerSel === 'scissors' && computerSel === 'rock')){
         computerScore++;
         return `You loose! ${computerSel} beats ${playerSel}`;
     }
-    //scissors - rock
-    else if(playerSel === 'scissors' && computerSel === 'rock'){
-        computerScore++;
-        return `You loose! ${computerSel} beats ${playerSel}`;
-    }
-    //scissors - paper
-    else if(playerSel === 'scissors' && computerSel === 'paper'){
-        playerScore++;
-        return `You win! ${playerSel} beats ${computerSel}`;
-    }
-    //scissors - scissors
-    else if(playerSel === 'scissors' && computerSel === 'scissors'){
-        return `Draw! p: ${playerSel} | c: ${computerSel}`;
-    }
-    // default return
+    // default return - caused by incorrect player input
     else {
         return `error: player selected: ${playerSel}, computer selected: ${computerSel}`;
     }
@@ -92,8 +73,6 @@ function game(){
     //send both to playRound()
     console.log(playRound(userChoice,computerChoice));
     console.log(`Current scores are: player: ${playerScore}, computer: ${computerScore}`)
-
-    //save result to score
 
     //repeat until either the player or computer score = 5
     if (playerScore < 5 && computerScore < 5 ){
