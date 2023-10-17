@@ -15,9 +15,11 @@ function getRandomNumber(){
 }
 
 function playRound(playerSelection, computerSelection){
-    //get player choice
+    if (playerSelection == null){
+        return 'null is not a valid choice, try again.'
+    }
     let playerSel = playerSelection.toLowerCase();
-    // enable shorthand of r,p or c.
+    // enable shorthand of r,p or c as input.
     if (playerSel[0] === "r"){
         playerSel = "rock";
     }else if(playerSel[0] === "p"){
@@ -30,7 +32,7 @@ function playRound(playerSelection, computerSelection){
     let computerSel = computerSelection.toLowerCase();
     console.log(`p: ${playerSel}, c: ${computerSel} `);
 
-    // create if statement for each result (draw, win, loose):
+    //if statement for each result (draw, win, loose):
 
     //draw
     if(    (playerSel === 'rock' && computerSel === 'rock') 
@@ -48,7 +50,7 @@ function playRound(playerSelection, computerSelection){
     }
     //loose
     else if(
-            (playerSel === 'rock' && computerSel === 'paper')
+               (playerSel === 'rock' && computerSel === 'paper')
             || (playerSel === 'paper' && computerSel === 'scissors')
             || (playerSel === 'scissors' && computerSel === 'rock')){
         computerScore++;
