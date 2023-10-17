@@ -1,4 +1,4 @@
-//declare variables to record the score
+//record initial score
 let playerScore = 0;
 let computerScore = 0;
 
@@ -63,20 +63,12 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
-
-    // get choice from user
     let userChoice = prompt("Lets play! Enter 'rock', 'paper' or 'scissors':");
-
-    //get choice from computer
     let computerChoice = getComputerChoice();
-    //console.log(computerChoice);
 
-
-    //send both to playRound()
+    //lets play a round and repeat until either the player or computer score = 5
     console.log(playRound(userChoice,computerChoice));
     console.log(`Current scores are: player: ${playerScore}, computer: ${computerScore}`)
-
-    //repeat until either the player or computer score = 5
     if (playerScore < 5 && computerScore < 5 ){
         game();
     }
@@ -84,7 +76,7 @@ function game(){
     else {
         if (playerScore == 5) {
             alert(`You win ${playerScore} to ${computerScore}!`);
-        }else{
+        } else {
             alert(`You loose ${computerScore} to ${playerScore}!`);
         }
         
