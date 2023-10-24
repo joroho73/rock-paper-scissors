@@ -1,6 +1,12 @@
 //record initial score
 let playerScore = 0;
 let computerScore = 0;
+let scorePara = document.querySelector('.currentScore');
+let resultPara = document.querySelector('.currentResult');
+let playerScoreDisplay = document.querySelector('.playerScoreDisplay');
+let computerScoreDisplay = document.querySelector('.computerScoreDisplay');
+let finalResult = document.querySelector('.finalResult');
+
 
 //choose rock, paper or scissors randomly for the computer
 //using getRandomNumber()
@@ -13,32 +19,26 @@ function getComputerChoice(){
 function getRandomNumber(){
     return Math.floor(Math.random() * 3);
 }
+function updateScore(score, result){
+    scorePara.innerText = score;
+    resultPara.innerText = result;
+    playerScoreDisplay.innerText = playerScore;
+    computerScoreDisplay.innerText = computerScore;
+}
 
-function playRound(playerSelection, computerSelection){
-    if (playerSelection == null){
-        return 'null is not a valid choice, try again.'
-    }
-    let playerSel = playerSelection.toLowerCase();
-    // enable shorthand of r,p or c as input.
-    if (playerSel[0] === "r"){
-        playerSel = "rock";
-    }else if(playerSel[0] === "p"){
-        playerSel = "paper";
-    }else if (playerSel[0] === "s"){
-        playerSel = "scissors";
-    }
+function playRound(playerSel){
+    finalResult.innerText = '';
 
     // get computer choice
-    let computerSel = computerSelection.toLowerCase();
-    console.log(`p: ${playerSel}, c: ${computerSel} `);
-
+    const computerSel = getComputerChoice();
+    const result = `${playerSel} -vs- ${computerSel}:`;
+ 
     //if statement for each result (draw, win, loose):
-
     //draw
     if(    (playerSel === 'rock' && computerSel === 'rock') 
         || (playerSel === 'paper' && computerSel === 'paper') 
         || (playerSel === 'scissors' && computerSel === 'scissors')){
-        return `Draw! p: ${playerSel} | c: ${computerSel}`;
+        updateScore(result,`draw!`);
     }
     //win
     else if(
@@ -46,7 +46,7 @@ function playRound(playerSelection, computerSelection){
         || (playerSel === 'paper' && computerSel === 'rock')
         || (playerSel === 'scissors' && computerSel === 'paper')){
         playerScore++;
-        return `You win! ${playerSel} beats ${computerSel}`;
+        updateScore(result,`you win! ${playerSel} beats ${computerSel}`);
     }
     //loose
     else if(
@@ -54,34 +54,26 @@ function playRound(playerSelection, computerSelection){
             || (playerSel === 'paper' && computerSel === 'scissors')
             || (playerSel === 'scissors' && computerSel === 'rock')){
         computerScore++;
-        return `You loose! ${computerSel} beats ${playerSel}`;
+        updateScore(result,`you loose! ${computerSel} beats ${playerSel}`);
     }
-    // default return - caused by incorrect player input
-    else {
-        return `error: player selected: ${playerSel}, computer selected: ${computerSel}`;
+
+    if (playerScore == 5){
+        finalResult.innerText = `Game Over. You win! ${playerScore} to ${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
     }
+    else if (computerScore == 5){
+        finalResult.innerText = `Game Over. You loose ${computerScore} to ${playerScore}`;
+        playerScore = 0;
+        computerScore = 0;
+    } 
 }
 
-function game(){
-    let userChoice = prompt("Lets play! Enter 'rock', 'paper' or 'scissors':");
-    let computerChoice = getComputerChoice();
+let btnRock = document.querySelector('.rock');
+btnRock.addEventListener('click', () => playRound('rock'));
 
-    //lets play a round and repeat until either the player or computer score = 5
-    console.log(playRound(userChoice,computerChoice));
-    console.log(`Current scores are: player: ${playerScore}, computer: ${computerScore}`)
-    if (playerScore < 5 && computerScore < 5 ){
-        game();
-    }
-    //declare winner and clear results
-    else {
-        if (playerScore == 5) {
-            alert(`You win ${playerScore} to ${computerScore}!`);
-        } else {
-            alert(`You loose ${computerScore} to ${playerScore}!`);
-        }
-        
-    }
+let btnPaper = document.querySelector('.paper');
+btnPaper.addEventListener('click', () => playRound('paper'));
 
-}
-
-game();
+let btnScissors = document.querySelector('.scissors');
+btnScissors.addEventListener('click', () => playRound('scissors'));
