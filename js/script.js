@@ -28,6 +28,10 @@ function updateScore(score, result){
 
 function playRound(playerSel){
     finalResult.innerText = '';
+    //hide finalResult if we are starting a new round
+    if (playerScore === 0 && computerScore === 0){
+        finalResult.classList.remove('bg-blue');
+    }
 
     // get computer choice
     const computerSel = getComputerChoice();
@@ -61,11 +65,16 @@ function playRound(playerSel){
         finalResult.innerText = `Game Over. You win! ${playerScore} to ${computerScore}`;
         playerScore = 0;
         computerScore = 0;
+        finalResult.classList.add('bg-blue');
+
     }
     else if (computerScore == 5){
         finalResult.innerText = `Game Over. You loose ${computerScore} to ${playerScore}`;
         playerScore = 0;
         computerScore = 0;
+        finalResult.classList.add('bg-blue');
+
+
     } 
 }
 

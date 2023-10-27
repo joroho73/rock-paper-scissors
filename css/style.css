@@ -32,9 +32,22 @@ button {
     width: 100%;
     display: inline-flex;
 }
-.finalResult {min-height: 16px;}
-.currentResult {min-height: 16px;}
-.currentScore {min-height: 16px;}
+.finalResult {
+    min-height: 32px;
+    padding: 8px;
+    color: #ececec}
+    
+.bg-blue {background-color: #5da2d5}
+
+.currentResult {
+    min-height: 16px;
+    border:1px solid #ececec
+}
+
+.currentScore {
+    min-height: 16px;
+    border:1px solid #ececec
+}
 
 .centre {
     text-align: center;
