@@ -5,21 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="js/script.js" type="application/javascript" defer></script>
+    <link href="css/style.css" rel="stylesheet" /> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        Current Score<br>
-        You: <span class='playerScoreDisplay'>0</span>, Computer: <span class="computerScoreDisplay">0</span>
-    </div>
-    <button class="rock">Rock</button>
-    <button class="paper">Paper</button>
-    <button class="scissors">Scissors</button>
-    <div>
-        <span class="currentScore"></span>
-        <span class="currentResult"></span>
-    </div>
-    <div>
-        <p class="finalResult"></p>
+    <div class="container centre">
+        <div class="box centre block">
+            <h1 class="block">Rock, Paper, Scissors</h1>
+            <div class="centre">
+                Current Score<br>
+                You: <span class='playerScoreDisplay'>0</span>, Computer: <span class="computerScoreDisplay">0</span>
+            </div>
+            <button class="rock">🪨</button>
+            <button class="paper">📃</button>
+            <button class="scissors">✂️</button>
+            <div class="centre">
+                <span class="currentScore"></span>
+                <span class="currentResult"></span>
+            </div>
+            <p class="centre finalResult"></p>
+        </div>
     </div>
 </body>
 </html>
